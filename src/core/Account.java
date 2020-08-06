@@ -31,17 +31,12 @@ public class Account {
         target.invest(amount);
     }
 
-    public String getAccountsId() {
+    public String getAccountId() {
         return accountsId;
     }
 
     public int getAmount(){
         return amount;
     }
-
-
-
-
-
 
 }
