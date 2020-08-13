@@ -11,67 +11,75 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class FileUtils {
 
-    public static String[] readLines(String path) {
+    public static List<String> readLines(String path) {
         FileInputStream stream = null;
         BufferedReader reader = null;
         try {
             stream = new FileInputStream(path);
             reader = new BufferedReader(new InputStreamReader(stream));
-            List<String> lines = new ArrayList<String>();
-            String line = null;
+            List<String> lines = new ArrayList<>();
+            String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-            return lines.toArray(new String[lines.size()]);
-        }
-        catch(Exception e) {}
-        finally {
+            return lines;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             FileUtils.close(reader);
             FileUtils.close(stream);
         }
-        return new String[0];
+        return new ArrayList<>();
     }
 
     public static void write(String path, String data, boolean append) {
         File file = new File(path);
 
         FileWriter writer = null;
-        BufferedWriter buffer = null;
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
             writer = new FileWriter(path, append);
             writer.write(data);
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             FileUtils.close(writer);
-            FileUtils.close(buffer);
         }
     }
 
     public static void write(String path, String[] data, boolean append) {
         StringBuilder builder = new StringBuilder();
         for (String line : data) {
-            builder.append(line + "\r\n");
+            builder.append(line).append("\r\n");
         }
         FileUtils.write(path, builder.toString(), append);
     }
-
 
     public static void close(Closeable closeable) {
         if (closeable != null) {
             try {
                 closeable.close();
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    public static void createFile(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }

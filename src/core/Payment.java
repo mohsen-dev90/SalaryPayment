@@ -2,9 +2,9 @@ package core;
 
 public class Payment {
 
-    private String type;
-    private String accountId;
-    private int amount;
+    private final String type;
+    private final String accountId;
+    private final int amount;
 
     public Payment(String type, String accountId, int amount) {
         this.type = type;
@@ -13,7 +13,7 @@ public class Payment {
     }
 
     public Payment(String type, String accountId, String amount) {
-        this(type, accountId, Integer.valueOf(amount));
+        this(type, accountId, Integer.parseInt(amount));
     }
 
     public boolean isDebtor() {

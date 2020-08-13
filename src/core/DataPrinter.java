@@ -1,8 +1,10 @@
 package core;
 
+import java.util.List;
+
 public class DataPrinter {
 
-    public static void printAccounts(Account[] accounts) {
+    public static void printAccounts(List<Account> accounts) {
         System.out.println();
         System.out.println("############# Accounts List #############\n");
         for (Account account : accounts) {
@@ -12,7 +14,7 @@ public class DataPrinter {
         System.out.println();
     }
 
-    public static void printPayments(Payment[] payments) {
+    public static void printPayments(List<Payment> payments) {
         System.out.println();
         System.out.println("############# Payments List #############\n");
         for (Payment payment : payments) {
